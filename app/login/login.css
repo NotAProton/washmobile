@@ -1,0 +1,38 @@
+.mantine-TextInput-label {
+    color: #e6e1e6 !important;
+}
+
+.mantine-PasswordInput-label {
+    color: #e6e1e6 !important;
+}
+
+.mantine-TextInput-input {
+    background-color: #252326 !important;
+    color: #e6e1e6 !important;
+    border: 2px solid transparent !important;
+}
+
+.mantine-TextInput-input:focus {
+    border: 2px solid #533688 !important;
+
+}
+
+.mantine-PasswordInput-input {
+    background-color: #252326 !important;
+    border: 2px solid transparent;
+
+}
+
+.mantine-PasswordInput-innerInput {
+    color: #e6e1e6 !important;
+}
+
+.mantine-PasswordInput-input:focus-within {
+    border: 2px solid #533688 !important;
+
+}
+
+.swal-popup-class {
+    background-color: #643b45 !important;
+    color: #ffd9e0 !important;
+}

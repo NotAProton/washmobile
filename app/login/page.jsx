@@ -1,16 +1,26 @@
 'use client'
 import { useState } from 'react'
-import { Container, TextInput, Text, Button, Loader, PasswordInput } from '@mantine/core'
+import { Container, TextInput, Button, Loader, PasswordInput } from '@mantine/core'
 import { apiDomain } from '../config'
 import Swal from 'sweetalert2'
+import { useRouter } from 'next/navigation'
+import './login.css'
 
 export default function Page () {
+  const [sm] = useState(
+    (typeof window !== 'undefined') ? window.matchMedia('(min-width: 768px)').matches : null
+  )
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const Toast = Swal.mixin({
+    customClass: {
+      popup: 'swal-popup-class',
+      title: 'swal-title-class'
+    },
     toast: true,
-    position: 'top',
+    position: sm ? 'top' : 'center',
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
@@ -36,6 +46,7 @@ export default function Page () {
   const isPasswordValid = () => {
     return password.length < 20 && password.length >= 3
   }
+  const router = useRouter()
 
   const handleButtonClick = () => {
     setLoading(true)
@@ -67,7 +78,7 @@ export default function Page () {
           response.text().then((data) => {
             localStorage.setItem('emailID', email)
             localStorage.setItem('key', data)
-            window.location.href = `/${nextRedirect}`
+            router.push(`/${nextRedirect}`)
           })
         }
       })
@@ -77,28 +88,36 @@ export default function Page () {
 
   return (
         <div className='flex flex-col items-center h-screen'>
-            <Container className="text-neutral-700 items-center text-center rounded-lg bg-neutral-200"
-                style={{ marginTop: '10rem', padding: '1.5rem' }}>
+            <Container className="items-center rounded-lg"
+                style={{ marginTop: '10rem', padding: '1.5rem', color: '#e6e1e6' }}>
                 <h3 className="text-1xl text-center sm:text-2xl">
                     Login using your Institute Mail</h3>
-                <div className="text-sm sm:text-lg sm:text-left mt-5 sm:mt-7">
+                <div className="text-sm mt-5">
                     <TextInput label="Your email" placeholder="name23bte00" rightSection={
-                        <Text className='bg-neutral-250 text-sm'>@iiitkottayam.ac.in</Text>}
+                        <span style={{ color: '#e6e1e6' }} className='text-sm'>@iiitkottayam.ac.in</span>}
                         rightSectionWidth={120}
                         value={email}
                         onChange={handleEmailChange}
                     />
-                    <PasswordInput label="Password"
+                    <PasswordInput className="mt-4" label="Password"
                         value={password}
                         onChange={handlePasswordChange}
                     />
                 </div>
-                <div>
+                <div className='text-center items-center'>
                     <Button
                         disabled={!isEmailValid() || loading || !isPasswordValid()}
                         onClick={handleButtonClick}
-                        className='mt-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-                        style={{ border: '2px solid grey' }}
+                        className='mt-3 py-2 px-4 rounded'
+                        style={(isEmailValid() && !loading && isPasswordValid())
+                          ? {
+                              background: '#d4bbff',
+                              color: '#3d1b73'
+                            }
+                          : {
+                              background: '#4b4358',
+                              color: '#736d7a'
+                            } }
                     >
                         {loading ? <Loader size={'xs'} /> : 'Proceed'}
 
@@ -106,7 +125,7 @@ export default function Page () {
                 </div>
 
             </Container>
-            <div className='fixed mt-2 inset-x-0 bottom-3 text-center text-gray-800'>Built and Maintained by Akshat</div>
+            <div className='fixed mt-2 inset-x-0 bottom-3 text-center text-gray-300'>Built and Maintained by Akshat</div>
 
         </div>
   )

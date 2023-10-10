@@ -1,0 +1,7 @@
+{
+  "name": "washfront",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}

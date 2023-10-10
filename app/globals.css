@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    background-color: #1d1b1e !important;
+    color: #e6e1e6 !important;
+}
+
+.mantine-Modal-body {
+    background-color: #643b46 !important;
+    color: #ffd9e0 !important;
+}
+
+.mantine-Modal-header {
+    background-color: #643b46 !important;
+    color: #ffd9e0 !important;
+
+}
+
+.mantine-Modal-content {
+    background-color: #643b46 !important;
+
+}
+
+.mantine-Modal-close {
+    color: #e6e1e6 !important;
+}
+
+.mantine-Modal-close:hover {
+    background-color: #643b46 !important;
+}
